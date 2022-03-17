@@ -13,6 +13,7 @@ public class PrimeNumberQuiz {
         answer(41);
         answer(20);
         answer(100);
+        answer(150);
     }
 
     // 1. primeNumber 아래의 소수를 알아야 함 (에라스토테네스의 책)
@@ -26,6 +27,16 @@ public class PrimeNumberQuiz {
         int left = 0;
         int right = 1;
 
+        res = getRes(primeNumber, primeList, res, left, right);
+
+        if(res != 0) {
+            System.out.printf("%d를 만들 수 있는 연속된 소수의 합은 %d개 입니다. \n", primeNumber, res);
+        } else {
+            System.out.printf("연속된 소수의 합으로 %d을 만들 수 없습니다. \n", primeNumber);
+        }
+    }
+
+    private static int getRes(int primeNumber, ArrayList<Integer> primeList, int res, int left, int right) {
         while (left < primeList.size() && right < primeList.size()) {
             int sum = 0;
             for(int i = left; i < right; i++) {
@@ -38,16 +49,11 @@ public class PrimeNumberQuiz {
                 left += 1;
             } else if(sum == primeNumber) {
                 toString(primeList, primeNumber, left, right);
-                res++;
                 right += 1;
+                res++;
             }
         }
-
-        if(res != 0) {
-            System.out.printf("%d를 만들 수 있는 연속된 소수의 합은 %d개 입니다. \n", primeNumber, res);
-        } else {
-            System.out.printf("연속된 소수의 합으로 %d을 만들 수 없습니다. \n", primeNumber);
-        }
+        return res;
     }
 
     public static void toString(ArrayList<Integer> primeList, int primeNumber, int left, int right) {
