@@ -1,4 +1,4 @@
-package Mogacko.Tree;
+package Mogacko.BinarySearchTree;
 
 public class Node {
     int data;

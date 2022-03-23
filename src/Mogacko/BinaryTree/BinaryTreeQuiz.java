@@ -1,6 +1,4 @@
-package Mogacko.Tree;
-
-import java.util.Vector;
+package Mogacko.BinaryTree;
 
 // 트리의 가장 깊은 레벨에 존재하는 노드와, 그때의 트리의 높이를 구하세요.
 // 노드 : 12, 높이 4(0부터 시작)
