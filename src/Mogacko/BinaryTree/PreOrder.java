@@ -1,9 +1,9 @@
-package Mogacko.Tree;
+package Mogacko.BinaryTree;
 
-// 후위 순회
-// 왼쪽 자식 노드 -> 오른쪽 자식 노드 -> 부모 노드
-// 출력 : 4 -> 5 -> 2 -> 3 -> 1
-public class PostOrder {
+// 전위 순회
+// 부모 노드 -> 왼쪽 자식 노드 -> 오른쪽 자식 노드
+// 출력 : 1 -> 2 -> 4 -> 5 -> 3
+public class PreOrder {
     public static Node initTree() {
         Node root = new Node(1);
 
@@ -24,17 +24,17 @@ public class PostOrder {
         return root;
     }
 
-    public static void postOrder(Node node) {
+    public static void preOrder(Node node) {
         if(node == null) {
             return;
         }
-        postOrder(node.left);
-        postOrder(node.right);
         System.out.println(node.data);
+        preOrder(node.left);
+        preOrder(node.right);
     }
 
     public static void main(String[] args) {
         Node root = initTree();
-        postOrder(root);
+        preOrder(root);
     }
 }

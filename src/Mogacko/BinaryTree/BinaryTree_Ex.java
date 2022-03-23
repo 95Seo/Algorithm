@@ -1,4 +1,4 @@
-package Mogacko.Tree;
+package Mogacko.BinaryTree;
 
 public class BinaryTree_Ex {
     public static void main(String[] args) {
