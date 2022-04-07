@@ -1,21 +1,26 @@
-package EcoteBook.Chapter03.GreedyAlgorithm;
+package EcoteBook.Chapter03;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
 
 // 큰 수의 법칙
 // 다양한 수로 이루어진 배열이 있을 때 주어진 수들을 M번 더하여 가장 큰 수를 만드는 법칙
 // 단, 배열의 특정한 인덱스에 해당하는 수가 연속해서 K번 초과하여 더해질 수 없다.
 
-// 입력 조건
+// [입력 조건]
 // 첫째 줄에 N(2 <= N <= 1,000), M(1 <= M <= 10,000), K(1 <= K <= 10,000)의 자연수가 주어지며, 각 자연수는 공백으로 구분한다.
 // 둘째 줄에 N개의 자연수가 주어진다. 각 자연수는 공백으로 구분한다. 단 각각의 자연수는 1이상 10,000이하의 수로 주어진다.
 // 입력으로 주어지는 K는 항상 M보다 작거나 같다.
 
-// 출력 조건
+// [출력 조건]
 // 첫째 줄에 공빈이의 큰 수의 법칙에 따라 더해진 답을 출력한다.
 
+// [입력 예시]
+// 5 8 3
+// 2 4 5 4 6
+
+// [출력 예시]
+// 46
 public class Ch03_02 {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
@@ -23,9 +28,9 @@ public class Ch03_02 {
 
         // N, M, K를 공백을 기준으로 구분하여 입력 받기
         System.out.println("N(2 <= N <= 1,000), M(1 <= M <= 10,000), K(1 <= K <= 10,000)를 입력해 주세요");
-        N = setN(N, s);
-        M = setM(M, s);
-        K = setK(K, s);
+        N = setN(s);
+        M = setMK(s);
+        K = setMK(s);
 
         // N개의 배열 생성
         int[] data = new int[N];
@@ -37,6 +42,7 @@ public class Ch03_02 {
         }
 
         sort(data);  // 입력받은 수를 정렬하기
+//        Arrays.sort(data);
         System.out.println("정렬 결과");
         toString(data);
 
@@ -54,37 +60,26 @@ public class Ch03_02 {
         System.out.println("큰 수의 법칙에 따라 더해진 답 : " + result);
     }
 
-    private static int setN(int N, Scanner s) {
+    private static int setN(Scanner s) {
         int temp = s.nextInt();
 
         if (temp < 2 || temp > 1000) {
             System.out.println("정수 N은 2 <= N <= 1,000 범위 안의 정수 여야 합니다.");
             System.out.println("다시 입력해 주세요.");
-            return setN(N, s);
+            return setN(s);
         }
-        return N = temp;
+        return temp;
     }
 
-    private static int setM(int M, Scanner s) {
+    private static int setMK(Scanner s) {
         int temp = s.nextInt();
 
         if (temp < 1 || temp > 10000) {
             System.out.println("정수 M은 2 <= M <= 1,0000 범위 안의 정수 여야 합니다.");
             System.out.println("다시 입력해 주세요.");
-            return setN(M, s);
+            return setMK(s);
         }
-         return M = temp;
-    }
-
-    private static int setK(int K, Scanner s) {
-        int temp = s.nextInt();
-
-        if (temp < 1 || temp > 10000) {
-            System.out.println("정수 K은 2 <= K <= 1,0000 범위 안의 정수 여야 합니다.");
-            System.out.println("다시 입력해 주세요.");
-            return setN(K, s);
-        }
-        return K = temp;
+         return temp;
     }
 
     // 버블 정렬
