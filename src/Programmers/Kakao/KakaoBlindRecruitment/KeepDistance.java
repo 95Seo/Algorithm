@@ -135,13 +135,13 @@ public class KeepDistance {
     }
 }
 
-class Place {
-    int cloumn;
-    int row;
-
-    public Place(int cloumn, int row) {
-        this.cloumn = cloumn;
-        this.row = row;
-        System.out.println("cloumn : " + cloumn + ", row : " + row);
-    }
-}
+//class Place {
+//    int cloumn;
+//    int row;
+//
+//    public Place(int cloumn, int row) {
+//        this.cloumn = cloumn;
+//        this.row = row;
+//        System.out.println("cloumn : " + cloumn + ", row : " + row);
+//    }
+//}
