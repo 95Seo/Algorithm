@@ -42,42 +42,83 @@ public class MatrixBoarder {
         return answer;
     }
 
-    // 적합성 부족 리팩토링 필요
     static int rotation(int x1, int x2, int y1, int y2) {
-        // 움직임 정의
-        int[] dx = {1, 0, -1, 0};
-        int[] dy = {0, 1, 0, -1};
-
-        int curX = x1;
-        int curY = y1;
-
-        int first = arr[curY][curX], temp;
         int min = Integer.MAX_VALUE;
-        int idx = 0;
+        int first = arr[y1][x1];
+        int temp;
 
-        int nextX;
-        int nextY;
-        
-        while(idx < 4) {
-            nextX = curX + dx[idx];
-            nextY = curY + dy[idx];
-
-            if(nextX < x1 || nextX > x2 || nextY > y2 || nextY < y1) {
-                idx++;
-            } else {
-                temp = arr[nextY][nextX];
-                arr[nextY][nextX] = first;
-                first = temp;
-
-                if (min > arr[curY][curX])
-                    min = arr[curY][curX];
-
-                curX = nextX;
-                curY = nextY;
-            }
+        // 상하좌우 움직임 나눠서 풀어보기
+        // 우
+        for (int i = x1; i < x2; i++) {
+            min = Math.min(min, arr[y1][i]);
+            temp = arr[y1][i+1];
+            arr[y1][i+1] = first;
+            first = temp;
         }
+
+        // 하
+        for (int i = y1; i < y2; i++) {
+            min = Math.min(min, arr[i][x2]);
+            temp = arr[i+1][x2];
+            arr[i+1][x2] = first;
+            first = temp;
+        }
+
+        // 좌
+        for (int i = x2; i > x1; i--) {
+            min = Math.min(min, arr[y2][i]);
+            temp = arr[y2][i-1];
+            arr[y2][i-1] = first;
+            first = temp;
+        }
+
+        // 상
+        for (int i = y2; i > y1; i--) {
+            min = Math.min(min, arr[i][x1]);
+            temp = arr[i-1][x1];
+            arr[i-1][x1] = first;
+            first = temp;
+        }
+
         return min;
     }
+    
+    // 적합성 부족 리팩토링 필요
+//    static int rotation(int x1, int x2, int y1, int y2) {
+//        // 움직임 정의
+//        int[] dx = {1, 0, -1, 0};
+//        int[] dy = {0, 1, 0, -1};
+//
+//        int curX = x1;
+//        int curY = y1;
+//
+//        int first = arr[curY][curX], temp;
+//        int min = Integer.MAX_VALUE;
+//        int idx = 0;
+//
+//        int nextX;
+//        int nextY;
+//
+//        while(idx < 4) {
+//            nextX = curX + dx[idx];
+//            nextY = curY + dy[idx];
+//
+//            if(nextX < x1 || nextX > x2 || nextY > y2 || nextY < y1) {
+//                idx++;
+//            } else {
+//                temp = arr[nextY][nextX];
+//                arr[nextY][nextX] = first;
+//                first = temp;
+//
+//                if (min > arr[curY][curX])
+//                    min = arr[curY][curX];
+//
+//                curX = nextX;
+//                curY = nextY;
+//            }
+//        }
+//        return min;
+//    }
 
     static void printArr(int rows, int columns) {
         for(int i = 0; i < rows; i++) {
