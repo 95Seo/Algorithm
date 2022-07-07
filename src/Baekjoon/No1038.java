@@ -1,10 +1,10 @@
-package Baekjoon.No1038;
+package Baekjoon;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Main {
+public class No1038 {
 
     static ArrayList<Long> list;
 
