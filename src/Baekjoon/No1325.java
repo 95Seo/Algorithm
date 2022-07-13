@@ -21,10 +21,11 @@ package Baekjoon;
 // 4 3
 // 5 3
 
-import java.util.*;
-
 // [출력 예시]
 // 1 2
+
+import java.util.*;
+
 public class No1325 {
 
     static int[] answer;
