@@ -89,7 +89,7 @@ public class No1389 {
             for (int j = 1; j <= n; j++) {
                 kevinBacon += arr[i][j];
             }
-            System.out.println("i = " + i + ", kevin = " + kevinBacon);
+
             if (min > kevinBacon) {
                 min = kevinBacon;
                 result = i;
