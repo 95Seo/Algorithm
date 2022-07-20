@@ -48,10 +48,6 @@ public class No1334 {
         String rightNum = getRightNum();
         BigInteger midNum = getMidNum();
         String reversNum = getReversNum(leftNum);
-//        System.out.println("leftNum = " + leftNum);
-//        System.out.println("rightNum = " + rightNum);
-//        System.out.println("midNum = " + midNum);
-//        System.out.println("reversNum = " + reversNum);
 
         if(digit == 1 || num.equals(BigInteger.TEN)) {
             if(num.compareTo(BigInteger.valueOf(9)) < 0) {
@@ -72,11 +68,6 @@ public class No1334 {
                 // num + 1 후 홀짝 판단
                 num = num.add(BigInteger.ONE);
                 setting(num);
-
-//                System.out.println("leftNum = " + leftNum);
-//                System.out.println("rightNum = " + rightNum);
-//                System.out.println("midNum = " + midNum);
-//                System.out.println("reversNum = " + reversNum);
 
                 // 홀수
                 if (digit %2 == 0) {
@@ -121,10 +112,6 @@ public class No1334 {
                     leftNum = getLeftNum();
                     rightNum = getRightNum();
                     reversNum = getReversNum(leftNum);
-
-//                    System.out.println("leftNum = " + leftNum);
-//                    System.out.println("rightNum = " + rightNum);
-//                    System.out.println("reversNum = " + reversNum);
 
                     if (reversNum.compareTo(rightNum) >= 0) {
                         result = leftNum + reversNum;
