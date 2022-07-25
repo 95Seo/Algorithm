@@ -26,6 +26,7 @@ package Baekjoon;
 // 1 7 13
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -61,20 +62,24 @@ public class No2583 {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (!bArr[i][j])
-                    list.add(bfs(i, j));
+                if (!bArr[i][j]) {
+                    int result = bfs(i, j);
+                    list.add(result);
+                }
             }
         }
 
+        Collections.sort(list);
+
+        System.out.println(list.size());
         for (int i : list) {
-            System.out.println(i + " ");
+            System.out.print(i + " ");
         }
     }
 
     // 열, 행을 받음
     static int bfs(int row, int column) {
-        int result = 0;
-        System.out.println("row = " + row + ", column = " + column);
+        int result = 1;
 
         bArr[row][column] = true;
         // 열
@@ -85,16 +90,11 @@ public class No2583 {
         for (int d = 0; d < 4; d++) {
             int nextX = column + dX[d];
             int nextY = row + dY[d];
-            System.out.println("d = " + d);
-            System.out.println("nextY = " + nextY + ", nextX = " + nextX);
 
-            if (nextY > n || nextY < 0 || nextX > m || nextX < 0) {
-                System.out.println("continue");
+            if (nextY >= n || nextY < 0 || nextX >= m || nextX < 0)
                 continue;
-            }
-            System.out.println(bArr[nextY][nextX]);
+
             if (!bArr[nextY][nextX]) {
-                result++;
                 result += bfs(nextY, nextX);
             }
         }
