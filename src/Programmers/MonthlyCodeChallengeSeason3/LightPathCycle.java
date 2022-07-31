@@ -12,12 +12,11 @@ import java.util.*;
 // 3 : ^
 
 public class LightPathCycle {
-    static int num;
-    static String[][] arr;
+    static String[][] sArr;
+    static boolean[][][] bArr;
     static int[] nextRow = {0, 1, 0, -1};
     static int[] nextColumn = {1, 0, -1, 0};
     static int rowSize, columnSize;
-    static Queue<Integer> queue;
 
     public static void main(String[] args) {
         String[] input = {"SL","LR"};
@@ -29,14 +28,8 @@ public class LightPathCycle {
         String[] input2 = {"R","R"};
         solution(input2);
         System.out.println();
-        String[] input3 = {"R","R","R","R"};
+        String[] input3 = {"RSL","SLR","LRS","RSR"};
         solution(input3);
-        System.out.println();
-        String[] input4 = {"RRL","LLR","LRL","RLR"};
-        solution(input4);
-        System.out.println();
-        String[] input5 = {"LLR"};
-        solution(input5);
     }
 
     static int[] solution(String[] grid) {
@@ -45,28 +38,32 @@ public class LightPathCycle {
         rowSize = grid.length;
         columnSize = grid[0].length();
 
-        arr = new String[rowSize][columnSize];
+        sArr = new String[rowSize][columnSize];
+        bArr = new boolean[rowSize][columnSize][4];
 
         // 입력 초기화
         for (int i = 0; i < rowSize; i++) {
             String[] s = grid[i].split("");
             for (int j = 0; j < columnSize; j++) {
-                arr[i][j] = s[j];
+                sArr[i][j] = s[j];
             }
         }
 
-        queue = new LinkedList<>();
-        queue.add(0);
-        queue.add(1);
-        queue.add(2);
-        queue.add(3);
-
-        while(!queue.isEmpty()) {
-            int num = queue.poll();
-            Node node = new Node(num, 0, 0);
-            result.add(roof(node));
+        // 입력 초기화
+        for (int i = 0; i < rowSize; i++) {
+            String[] s = grid[i].split("");
+            for (int j = 0; j < columnSize; j++) {
+                for (int k = 0; k < 4; k++) {
+                    // k 동 : 0, 남 : 1, 서 : 2, 북 : 3
+                    if (!bArr[i][j][k]) {
+                        Node node = new Node(k, i, j);
+                        result.add(roof(node));
+                    }
+                }
+            }
         }
 
+        // 제출할 때는 없애야 함
         for(int i : result)
             System.out.print(i + " ");
 
@@ -81,7 +78,9 @@ public class LightPathCycle {
     static int roof(Node node) {
         Node startNode = new Node(node.num, node.row, node.column);
         while (true) {
-            switch (arr[node.row][node.column]) {
+            bArr[node.row][node.column][node.num] = true;
+
+            switch (sArr[node.row][node.column]) {
                 case "L" :
                     setLeft(node);
                     break;
@@ -98,13 +97,6 @@ public class LightPathCycle {
             // 범위를 넘어가면 값 변경
             if (node.row < 0 || node.row >= rowSize || node.column < 0 || node.column >= columnSize)
                 switchNode(node);
-
-            // 0, 0 으로 들어올때 num 이 queue에 있으면 queue에서 제거
-            // 루프롤 줄이기 위함
-            if (node.column == 0 && node.row == 0) {
-                if (queue.contains(node.num))
-                    queue.remove(node.num);
-            }
 
             // 첫 노드와 같은 값이 들어왔다면 루프를 모두 확인한 것
             if (equals(startNode, node))
@@ -126,40 +118,15 @@ public class LightPathCycle {
     }
 
     static void setLeft(Node node) {
-        num = node.num;
-        switch (num) {
-            case 0 :
-                node.num = 3;
-                    break;
-            case 1 :
-                node.num = 0;
-                break;
-            case 2 :
-                node.num = 1;
-                break;
-            case 3 :
-                node.num = 2;
-                break;
-        }
+        node.num -= 1;
+        if (node.num < 0)
+            node.num = 3;
     }
 
     static void setRight(Node node) {
-        num = node.num;
-
-        switch (num) {
-            case 0 :
-                node.num = 1;
-                break;
-            case 1 :
-                node.num = 2;
-                break;
-            case 2 :
-                node.num = 3;
-                break;
-            case 3 :
-                node.num = 0;
-                break;
-        }
+        node.num += 1;
+        if (node.num > 3)
+            node.num = 0;
     }
 
     // hashCode or equals 매서드로 가능할듯?
