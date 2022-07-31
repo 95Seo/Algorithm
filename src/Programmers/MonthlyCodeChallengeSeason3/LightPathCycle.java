@@ -49,7 +49,7 @@ public class LightPathCycle {
             }
         }
 
-        // 입력 초기화
+        // 루프 탐색
         for (int i = 0; i < rowSize; i++) {
             String[] s = grid[i].split("");
             for (int j = 0; j < columnSize; j++) {
